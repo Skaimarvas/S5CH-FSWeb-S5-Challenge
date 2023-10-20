@@ -44,7 +44,7 @@ const headerEkleyici = (secici) => {
   const headerEkle = Header(
     "Teknoloji Zamanı",
     "11 Kasım 2022",
-    "sağdaki yazi"
+    "sağdaki yazı"
   );
 
   hedef.append(headerEkle);

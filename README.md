@@ -36,7 +36,7 @@ Aşağıda listelenen minimum uygulanabilir ürün (MVP) spesifikasyonlarını k
 
 - [x] Adım 1 ve 2 `src/bileşenler/header.js` dosyasında açıklandı.
 - [x] Adım 3 ve 4 `src/bileşenler/tabs.js` dosyasında açıklandı.
-- [ ] Adım 5 ve 6 `src/bileşenler/card.js` dosyasında açıklandı.
+- [x] Adım 5 ve 6 `src/bileşenler/card.js` dosyasında açıklandı.
 
 **Önemli Notlar:**
 
@@ -52,7 +52,12 @@ Aşağıda listelenen minimum uygulanabilir ürün (MVP) spesifikasyonlarını k
 Aşağıdaki soruları yanıtlayarak bu sprint'in kavramlarını anladığınızı gösterin. Her sorudan sonra yanıtlarınızı eklemek için bu belgeyi düzenleyin.
 
 1. DOM nedir?
+   Bir web sayfası tarayıcı ile yüklendiğinde tarayıcı önce HTML'li alır ve CSS ile birleştirir. Ardından tarayıcı Javascript kullanarak sayfanın görünümü ve eylemleri için bir model oluştururç Bu model sayfadayi her öğeyi sırayla içeren Javascript objesi yani nesnesidir. Bu nesne Document Object Model olarak adlandırılır.
 2. Bir event nedir?
+   Event, Javascript kodlarının-komutlarının HTML ile etkileşime geçmesine olanak sağlamaktadır.
 3. Bir event dinleyici(listener) nedir?
+   Javascript'te bir olayın gerçekleşmesini bekleyen ve ardından ona yanıt veren bir işlevdir.
 4. Neden bir NodeList'i Array'e dönüştürelim??
+   NodeList'i Array'e dönüştürdüğümüzde bize iterasyon kolaylığı, dil genişletme, veri aktarımı ve veri manipülasyonu sağlar.
 5. Bileşen nedir?
+   Bileşenler, yazılımın modülerliğini artırmak ve kodun daha iyi sürdürülebilir olmasını sağlamak için kullanılır.

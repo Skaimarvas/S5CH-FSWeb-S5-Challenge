@@ -45,17 +45,15 @@ const cardEkleyici = (secici) => {
     .then((response) => {
       const makaleler = response.data.makaleler;
 
-      // Makaleleri DOM'a ekle
       for (const makaleId in makaleler) {
         if (makaleler.hasOwnProperty(makaleId)) {
-          const innerObj = makaleler[makaleId]; // İç objeye erişim
+          const innerObj = makaleler[makaleId];
           for (let i = 0; i < innerObj.length; i++) {
             const card = Card(innerObj[i]);
 
             const element = document.querySelector(secici);
             element.appendChild(card);
           }
-          // İç objeyi kullanarak kartı oluşturun
         }
       }
     })

@@ -26,7 +26,7 @@ const Tablar = (konu) => {
   return topics;
 };
 
-const konular = ["JAVASCRIPT", "BOOTSTRAP", "TEKNOLOJİ", "JQUERY", "NODE.JS"];
+const konular = ["javascript", "bootstrap", "teknoloji", "jquery", "node.js"];
 
 const tabEkleyici = (secici) => {
   // GÖREV 4

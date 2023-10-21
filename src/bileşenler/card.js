@@ -1,80 +1,66 @@
 import axios from "axios";
 
 const Card = (makale) => {
-  // GÖREV 5
-  // ---------------------
-  // Aşağıda gördüğünüz işaretlemeyi döndürmesi gereken bu fonksiyonu uygulayın.
-  // Tek argümanı olarak "anabaslik", "yazarFoto" ve "yazarAdı" özelliklerine sahip bir "makale" nesnesi alır.
-  // Kullanılan etiketler, öğelerin hiyerarşisi ve öznitelikleri sağlanan işaretlemeyle tam olarak eşleşmelidir!
-  // Öğelerin içindeki metin, "textContent" özelliği kullanılarak ayarlanacaktır ("innerText" DEĞİL).
-  // Bir kullanıcı bir kartı tıkladığında makalenin başlığının konsola kaydedilmesi için click event dinleyicisi ekleyin.
-  //
-  // <div class="card">
-  //   <div class="headline">{ anabaslik }</div>
-  //   <div class="author">
-  //     <div class="img-container">
-  //       <img src={ yazarFoto }>
-  //     </div>
-  //     <span>{ yazarAdı } tarafından</span>
-  //   </div>
-  // </div>
-  //
+  const { anabaslik, yazarFoto, yazarAdi } = makale;
 
-  const card = document.createElement("div");
-  card.className = "card";
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("card");
 
-  const headLine = document.createElement("div");
-  headLine.className = "headline";
-  headLine.textContent = makale["anabaslik"];
-  card.append(headLine);
+  const headlineDiv = document.createElement("div");
+  headlineDiv.classList.add("headline");
+  headlineDiv.textContent = anabaslik;
 
-  const author = document.createElement("div");
-  author.className = "author";
-  card.append(author);
+  const authorDiv = document.createElement("div");
+  authorDiv.classList.add("author");
 
-  const imgAuthor = document.createElement("div");
-  imgAuthor.className = "img-container";
-  author.append(imgAuthor);
+  const imgContainerDiv = document.createElement("div");
+  imgContainerDiv.classList.add("img-container");
 
-  const imgSec = document.createElement("img");
-  imgSec.src = makale.yazarFoto;
-  imgAuthor.append(imgSec);
+  const authorImg = document.createElement("img");
+  authorImg.src = yazarFoto;
 
-  const yazarAdi = document.createElement("span");
-  yazarAdi.textContent = makale.yazarAdı;
-  author.append(yazarAdi);
-  console.log("T1");
-  return card;
+  imgContainerDiv.appendChild(authorImg);
+
+  const authorSpan = document.createElement("span");
+  authorSpan.textContent = `${yazarAdi} tarafından`;
+
+  authorDiv.appendChild(imgContainerDiv);
+  authorDiv.appendChild(authorSpan);
+
+  cardDiv.appendChild(headlineDiv);
+  cardDiv.appendChild(authorDiv);
+
+  // Click event listener
+  cardDiv.addEventListener("click", () => {
+    console.log(anabaslik);
+  });
+
+  return cardDiv;
 };
 
 const cardEkleyici = (secici) => {
-  // GÖREV 6
-  // ---------------------
-  // Tek bağımsız değişkeni olarak bir css seçici alan bu fonksiyonu uygulayın.
-  // Makaleleri bu uç noktadan almalıdır: `http://localhost:5001/api/makaleler` (console.log ile test edin!!).
-  // Bununla birlikte, makaleler tek bir düzenli dizi halinde organize edilmemiştir. Yanıtı yakından inceleyin!
-  // Card bileşenini kullanarak yanıttaki her makale nesnesinden bir kart oluşturun.
-  // Her cardı, fonksiyona iletilen seçiciyle eşleşen DOM'daki öğeye ekleyin.
-  //
+  // Makaleleri al
+  axios
+    .get("http://localhost:5001/api/makaleler")
+    .then((response) => {
+      const makaleler = response.data.makaleler;
 
-  const hedef = document.querySelector(secici);
+      // Makaleleri DOM'a ekle
+      for (const makaleId in makaleler) {
+        if (makaleler.hasOwnProperty(makaleId)) {
+          const innerObj = makaleler[makaleId]; // İç objeye erişim
+          for (let i = 0; i < innerObj.length; i++) {
+            const card = Card(innerObj[i]);
 
-  const cardEkle = async () => {
-    try {
-      const response = await axios({
-        method: "get",
-        url: "http://localhost:5001/api/makaleler",
-      });
-
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  cardEkle().then((data) => hedef.append(Card(data)));
-
-  return hedef;
+            const element = document.querySelector(secici);
+            element.appendChild(card);
+          }
+          // İç objeyi kullanarak kartı oluşturun
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Makaleler alınırken hata oluştu:", error);
+    });
 };
-
 export { Card, cardEkleyici };

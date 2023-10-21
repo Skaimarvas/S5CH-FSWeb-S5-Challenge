@@ -30,7 +30,6 @@ const Card = (makale) => {
   cardDiv.appendChild(headlineDiv);
   cardDiv.appendChild(authorDiv);
 
-  // Click event listener
   cardDiv.addEventListener("click", () => {
     console.log(anabaslik);
   });
@@ -39,7 +38,6 @@ const Card = (makale) => {
 };
 
 const cardEkleyici = (secici) => {
-  // Makaleleri al
   axios
     .get("http://localhost:5001/api/makaleler")
     .then((response) => {
